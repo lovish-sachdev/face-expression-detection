@@ -4,18 +4,20 @@ from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 class VideoTransformer(VideoTransformerBase):
     def transform(self, frame):
-        return frame
+        # Convert the frame to grayscale
+        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        return gray_frame
 
 def main():
     st.title("Webcam Viewer with Streamlit and WebRTC")
 
     webrtc_ctx = webrtc_streamer(
         key="example",
-        video_transformer_factory=VideoTransformer,
+        video_processor_factory=VideoTransformer,
         rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
     )
 
-    if webrtc_ctx.video_transformer:
+    if webrtc_ctx.video_processor:
         st.write("Press 'q' to quit the webcam.")
 
         # Check if the user pressed 'q' to quit
