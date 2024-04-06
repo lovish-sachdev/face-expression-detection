@@ -1,10 +1,10 @@
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, ClientSettings
+import cv2
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 class VideoTransformer(VideoTransformerBase):
     def transform(self, frame):
-        # You can modify the frame here
-        return frame
+        return gray_frame
 
 def main():
     st.title("Webcam Viewer with Streamlit and WebRTC")
@@ -12,10 +12,7 @@ def main():
     webrtc_ctx = webrtc_streamer(
         key="example",
         video_transformer_factory=VideoTransformer,
-        client_settings=ClientSettings(
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
-        ),
-        async_transform=True
+        rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
     )
 
     if webrtc_ctx.video_transformer:
