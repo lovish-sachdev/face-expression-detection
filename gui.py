@@ -30,7 +30,7 @@ def main():
     ## video processing
     if start_button_pressed:
         frame_placeholder = st.empty()
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(-1)
         while cap.isOpened() and not stop_button_pressed:
             ret, frame = cap.read()
             if not ret:
