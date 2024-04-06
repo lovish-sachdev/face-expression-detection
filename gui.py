@@ -3,7 +3,7 @@ import cv2
 from keras.models import model_from_json
 import numpy as np
 import os
-from streamlit_webrtc import webrtc_streamer
+from streamlit_webrtc import webrtc_streamer,RTCConfiguration
 import av
 
 class VideoProcessor():
@@ -61,5 +61,6 @@ face_tracker=cv2.CascadeClassifier(haar_file)
     
 
 # vid_pro=VideoProcessor(loaded_model,face_tracker)
-webrtc_streamer(key="key",video_processor_factory=VideoProcessor)
+webrtc_streamer(key="key",video_processor_factory=VideoProcessor,rtc_configuration=RTCConfiguration({"iceServers":[{"urls":['stun:stun.l.google.com:19302']}]}))
+
 
