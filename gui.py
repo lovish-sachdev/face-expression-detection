@@ -4,7 +4,7 @@ from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 class VideoTransformer(VideoTransformerBase):
     def transform(self, frame):
-        return gray_frame
+        return frame
 
 def main():
     st.title("Webcam Viewer with Streamlit and WebRTC")
